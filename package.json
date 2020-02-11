@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "axios-ts",
   "version": "0.0.0",
   "description": "",
@@ -11,19 +10,6 @@
     "dist"
   ],
   "author": "CHENYANGLu <clu3842@gmail.com>",
-=======
-  "name": "--libraryname--",
-  "version": "0.0.0",
-  "description": "",
-  "keywords": [],
-  "main": "dist/--libraryname--.umd.js",
-  "module": "dist/--libraryname--.es5.js",
-  "typings": "dist/types/--libraryname--.d.ts",
-  "files": [
-    "dist"
-  ],
-  "author": "--username-- <--usermail-->",
->>>>>>> 6947133849b646de82789fd89bb0c79421a9f4c3
   "repository": {
     "type": "git",
     "url": ""
@@ -46,13 +32,8 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-<<<<<<< HEAD
     "travis-deploy-once": "travis-deploy-once",
     "dev": "node examples/server.js"
-=======
-    "postinstall": "ts-node tools/init",
-    "travis-deploy-once": "travis-deploy-once"
->>>>>>> 6947133849b646de82789fd89bb0c79421a9f4c3
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
@@ -135,7 +116,6 @@
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.12.0",
-<<<<<<< HEAD
     "typescript": "^3.0.3",
     "webpack": "^4.28.4",
     "webpack-dev-middleware": "^3.5.0",
@@ -146,8 +126,3 @@
     "body-parser": "^1.18.3"
   }
 }
-=======
-    "typescript": "^3.0.3"
-  }
-}
->>>>>>> 6947133849b646de82789fd89bb0c79421a9f4c3
