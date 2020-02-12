@@ -3,6 +3,7 @@ export interface AxiosRequestConfig {
   method?: Method
   params?: any
   data?: any
+  headers?: any
 }
 
 export type Method =
