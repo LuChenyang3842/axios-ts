@@ -59,10 +59,10 @@ export function buildUrl(url: string, params?: any) {
   if (serializedParams) {
     const markIndex = url.indexOf('#')
     if (markIndex !== -1) {
-      url = url.slice(0, markIndex) //eliminate hash tag
+      url = url.slice(0, markIndex) // eliminate hash tag
     }
 
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams //keep the old url
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams // keep the old url
   }
 
   return url
