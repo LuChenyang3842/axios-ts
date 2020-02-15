@@ -23,27 +23,38 @@ app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
+registerExtendRouter()
+registerSimpleRouter()
+registerBaseRouter()
+registerErrorRouter()
+
+
+
 const port = process.env.PORT || 8080
 
 
-router.get('/simple/get', function(req, res) {
+function registerSimpleRouter() {
+  router.get('/simple/get', function (req, res) {
     res.json({
-      msg: `hello world`
+      msg: 'hello world'
     })
   })
+}
 
-  router.get('/base/get', function(req, res) {
+function registerBaseRouter() {
+
+  router.get('/base/get', function (req, res) {
     res.json(req.query)
   })
 
-
-  router.post('/base/post', function(req, res) {
+  router.post('/base/post', function (req, res) {
     res.json(req.body)
   })
-  
-  router.post('/base/buffer', function(req, res) {
+
+  router.post('/base/buffer', function (req, res) {
     let msg = []
-    req.on('data', (chunk) => {
+    req.on('data', chunk => {
       if (chunk) {
         msg.push(chunk)
       }
@@ -53,26 +64,73 @@ router.get('/simple/get', function(req, res) {
       res.json(buf.toJSON())
     })
   })
+}
 
-  router.get('/error/get', function(req, res) {
+function registerErrorRouter() {
+  router.get('/error/get', function (req, res) {
     if (Math.random() > 0.5) {
       res.json({
-        msg: `hello world`
+        msg: 'hello world'
       })
     } else {
       res.status(500)
       res.end()
     }
   })
-  
-  router.get('/error/timeout', function(req, res) {
+  router.get('/error/timeout', function (req, res) {
     setTimeout(() => {
       res.json({
-        msg: `hello world`
+        msg: 'hello world'
       })
     }, 3000)
   })
-  
+}
+
+
+function registerExtendRouter() {
+  router.get('/extend/get', function (req, res) {
+    res.json({
+      msg: 'hello world'
+    })
+  })
+
+  router.options('/extend/options', function (req, res) {
+    res.end()
+  })
+
+  router.head('/extend/head', function (req, res) {
+    res.end()
+  })
+
+  router.delete('/extend/delete', function (req, res) {
+    res.end()
+  })
+
+  router.post('/extend/post', function (req, res) {
+    res.json(req.body)
+  })
+
+  router.put('/extend/put', function (req, res) {
+    res.json(req.body)
+  })
+
+  router.patch('/extend/patch', function (req, res) {
+    res.json(req.body)
+  })
+
+  // 响应数据支持泛型接口
+  router.get('/extend/user', function (req, res) {
+    res.json({
+      code: 0,
+      message: 'ok',
+      result: {
+        name: 'Alice',
+        age: 18
+      }
+    })
+  })
+}
+
 app.use(router) 
 module.exports = app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
