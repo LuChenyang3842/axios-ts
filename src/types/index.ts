@@ -1,4 +1,5 @@
 export interface AxiosInstance extends Axios {
+    interceptors: any;
   <T = any>(config: AxiosRequestConfig): AxiosPromise<T>
 
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
@@ -25,6 +26,20 @@ export interface AxiosResponse<T = any> {
 
 export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {}
 
+export interface AxiosClassStatic {
+  new (config: AxiosRequestConfig): Axios
+}
+
+export interface AxiosStatic extends AxiosInstance {
+  create(config?: AxiosRequestConfig): AxiosInstance
+
+  isCancel: (value: any) => boolean
+
+  all<T>(promises: Array<T | Promise<T>>): Promise<T[]>
+  spread<T, R>(callback: (...args: T[]) => R): (arr: T[]) => R
+  Axios: AxiosClassStatic
+}
+
 export interface Axios {
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>
 
@@ -49,6 +64,20 @@ export interface AxiosError extends Error {
   request?: any
   response?: AxiosResponse
   isAxiosError: boolean
+}
+
+export interface AxiosInterceptorManager<T> {
+  use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number
+
+  eject(id: number): void
+}
+
+export interface ResolvedFn<T=any> {
+  (val: T): T | Promise<T>
+}
+
+export interface RejectedFn {
+  (error: any): any
 }
 
 export type Method =
